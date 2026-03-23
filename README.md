@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # quickserve
 
 A new Flutter project.
@@ -15,3 +16,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# quickserve-mobile
+>>>>>>> 8b24e8b3fd3d900ab6079774c666c08d05ed1c67
