@@ -7,14 +7,11 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
   final ServiceRepository repo;
 
   ServiceBloc(this.repo) : super(ServiceInitial()) {
-
-    // 🔁 START FETCHING
     on<FetchServices>((event, emit) async {
       emit(ServiceLoading());
 
       repo.startFetching();
 
-      // listen → dispatch event instead of emit
       repo.servicesStream.listen(
         (data) {
           add(_ServicesUpdated(data));
@@ -25,12 +22,10 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
       );
     });
 
-    // ✅ UPDATE EVENT
     on<_ServicesUpdated>((event, emit) {
       emit(ServiceLoaded(event.services));
     });
 
-    // ❌ ERROR EVENT
     on<_ServiceErrorEvent>((event, emit) {
       emit(ServiceError(event.message));
     });
@@ -43,7 +38,6 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
   }
 }
 
-// 🔁 Internal events
 class _ServicesUpdated extends ServiceEvent {
   final List services;
   _ServicesUpdated(this.services);

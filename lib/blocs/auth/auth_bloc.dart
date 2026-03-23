@@ -7,27 +7,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository repo;
 
   AuthBloc(this.repo) : super(AuthInitial()) {
-
     on<LoginEvent>((event, emit) async {
-      print("🔥 LOGIN EVENT TRIGGERED");
+      print("LOGIN EVENT TRIGGERED");
 
       emit(AuthLoading());
 
       try {
-        print("📡 CALLING API...");
+        print("CALLING API...");
         await repo.login(event.email, event.password);
 
-        print("✅ LOGIN SUCCESS");
+        print("LOGIN SUCCESS");
         emit(AuthAuthenticated());
-
       } catch (e) {
-        print("❌ LOGIN ERROR: $e");
+        print("LOGIN ERROR: $e");
         emit(AuthError("Login failed"));
       }
     });
 
     on<LogoutEvent>((event, emit) {
-      print("🚪 LOGOUT");
+      print("LOGOUT");
       emit(AuthUnauthenticated());
     });
   }

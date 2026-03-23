@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:quickserve/services/api_service.dart';
 
-
 class ServiceRepository {
   final _controller = StreamController<List<dynamic>>();
 
@@ -13,6 +12,7 @@ class ServiceRepository {
         final data = await ApiService.getServices();
         _controller.add(data);
       } catch (e) {
+        print("Err : $e");
         _controller.addError("Error fetching services");
       }
     });

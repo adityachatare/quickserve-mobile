@@ -5,16 +5,12 @@ abstract class BookingState extends Equatable {
   List<Object> get props => [];
 }
 
-// Initial
 class BookingInitial extends BookingState {}
 
-// Loading
 class BookingLoading extends BookingState {}
 
-// Success
 class BookingSuccess extends BookingState {}
 
-// Error
 class BookingError extends BookingState {
   final String message;
 

@@ -5,7 +5,6 @@ abstract class BookingEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// 📦 Create Booking
 class CreateBookingEvent extends BookingEvent {
   final Map<String, dynamic> data;
 

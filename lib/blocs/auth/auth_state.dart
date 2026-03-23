@@ -5,16 +5,12 @@ abstract class AuthState extends Equatable {
   List<Object> get props => [];
 }
 
-// Initial
 class AuthInitial extends AuthState {}
 
-// Loading
 class AuthLoading extends AuthState {}
 
-// Success
 class AuthAuthenticated extends AuthState {}
 
-// Failure
 class AuthError extends AuthState {
   final String message;
 
@@ -24,5 +20,4 @@ class AuthError extends AuthState {
   List<Object> get props => [message];
 }
 
-// Logged out
 class AuthUnauthenticated extends AuthState {}

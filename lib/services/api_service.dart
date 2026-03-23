@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static String baseUrl = "https://quickserve-backend.onrender.com";
+  static String baseUrl = dotenv.env['BASE_URL']!;
   static String? token;
 
   static Future<bool> login(String email, String password) async {
@@ -11,7 +12,7 @@ class ApiService {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({"email": email, "password": password}),
     );
-    print(res);
+    print(res.body);
 
     if (res.statusCode == 200) {
       token = jsonDecode(res.body)['token'];
@@ -21,9 +22,10 @@ class ApiService {
   }
 
   static Future<List<dynamic>> getServices() async {
+    print("Token : $token");
     final res = await http.get(
       Uri.parse('$baseUrl/api/v1/services'),
-      headers: {"Authorization": "Bearer ${token ?? ""}"},
+      headers: {"Authorization": "Bearer $token"},
     );
 
     return jsonDecode(res.body);
@@ -31,10 +33,10 @@ class ApiService {
 
   static Future<bool> createBooking(Map data) async {
     final res = await http.post(
-      Uri.parse('$baseUrl/api/v1/bookings'),
+      Uri.parse('$baseUrl/api/v1/bookings/add'),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer ${token ?? ""}",
+        "Authorization": "Bearer $token",
       },
       body: jsonEncode(data),
     );
